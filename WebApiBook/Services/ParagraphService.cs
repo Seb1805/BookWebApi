@@ -6,12 +6,14 @@ namespace WebApiBook.Services
     public class ParagraphService : IParagraphService
     {
         private readonly IUniqueWord _uniqueWordRepo;
-        private readonly IWatchlistWord _watchlistWord;
+        private readonly IWatchlistWord _watchlistWordRepo;
+        private readonly ITestWord _TestWordRepo;
 
-        public ParagraphService(IUniqueWord uniqueWord,IWatchlistWord watchlistWord)
+        public ParagraphService(IUniqueWord uniqueWord,IWatchlistWord watchlistWord, ITestWord TestWord)
         {
             _uniqueWordRepo = uniqueWord;
-            _watchlistWord = watchlistWord;
+            _watchlistWordRepo = watchlistWord;
+            _TestWordRepo = TestWord;
         }
 
         public int GetNumberOfUniqueWords(ParagraphRequest paragraph)
@@ -21,15 +23,23 @@ namespace WebApiBook.Services
             var count = uniqueWords.Count();
             int uniqueWordId = _uniqueWordRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWords = count });
             
-            foreach(var word in uniqueWords)
+            List<string> matchingWords = new List<string>();
+
+            foreach(var word in _TestWordRepo.GetAllTestWords())
             {
-                _watchlistWord.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
+                foreach(var word2 in uniqueWords)
+                {
+
+                }
             }
 
-            foreach(var word2 in _watchlistWord.GetWords())
+            System.Diagnostics.Trace.WriteLine("THIS" + uniqueWords.Intersect(_TestWordRepo.GetAllTestWords().Select(e => e.Word)));
+
+            foreach(var word in uniqueWords)
             {
-                Console.WriteLine(word2);
+                _watchlistWordRepo.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
             }
+
 
             return count;
         }
