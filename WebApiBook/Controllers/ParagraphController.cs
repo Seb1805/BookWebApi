@@ -18,24 +18,22 @@ namespace WebApiBook.Controllers
     {
         private readonly IUniqueWord _uniqueWordRepo;
         private readonly IWatchlistWord _watchlistWord;
+        private readonly IParagraphService _paragraphService;
 
-        public ParagraphController(IUniqueWord uniqueWordRepo, IWatchlistWord watchlistWordRepo)
+        public ParagraphController(IUniqueWord uniqueWordRepo, IWatchlistWord watchlistWordRepo, IParagraphService paragraphService)
         {
             _uniqueWordRepo = uniqueWordRepo;
             _watchlistWord = watchlistWordRepo;
+            _paragraphService = paragraphService;
         }
 
 
         [HttpPost]
-        public IActionResult PostParagraph([FromBody] WatchlistWord paragraph)
+        public IActionResult PostParagraph([FromBody] ParagraphRequest paragraph)
         {
-            IEnumerable<string> allWords = paragraph.Word.Split(' ');
-            IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
-            Console.WriteLine("uniqueWords", uniqueWords.Count());
-            //TODO: Implement
-            _watchlistWord.AddWatchlistWord(paragraph);
+            int uniqueWords = _paragraphService.GetNumberOfUniqueWords(paragraph);
             
-            return Ok(new { uniqueWords = uniqueWords.Count() });
+            return Ok(new { uniqueWords = uniqueWords });
         }
     }
 }
