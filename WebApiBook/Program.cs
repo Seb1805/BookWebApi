@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebApiBook.Data;
+using WebApiBook.Models;
+using WebApiBook.Repositories;
+using WebApiBook.Repositories.Interfaces;
+using WebApiBook.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +18,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BookContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BookDb")));
 
-
+//Register service(s) and repos
+builder.Services.AddScoped<IParagraphService, ParagraphService>();
+builder.Services.AddScoped<IUniqueWord, UniqueWordRepo>();
+builder.Services.AddScoped<IWatchlistWord, WatchlistWordRepo>();
 
 
 var app = builder.Build();

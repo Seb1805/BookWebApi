@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BookApi.Models;
 using WebApiBook.Data;
-using BookApi.Repositories.Interfaces;
+using WebApiBook.Models;
 using WebApiBook.Repositories.Interfaces;
 
 namespace WebApiBook.Controllers
@@ -28,7 +27,7 @@ namespace WebApiBook.Controllers
 
 
         [HttpPost]
-        public IActionResult PostParagraph([FromBody]WatchlistWord paragraph)
+        public IActionResult PostParagraph([FromBody] WatchlistWord paragraph)
         {
             IEnumerable<string> allWords = paragraph.Word.Split(' ');
             IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);

@@ -1,6 +1,7 @@
-﻿using BookApi.Models;
-using BookApi.Repositories.Interfaces;
+﻿using WebApiBook.Models;
+using WebApiBook.Repositories.Interfaces;
 using WebApiBook.Data;
+using WebApiBook.Models;
 
 namespace WebApiBook.Repositories
 {
@@ -12,6 +13,7 @@ namespace WebApiBook.Repositories
         {
             _context = context;
         }
+
         public int AddUniqueWord(UniqueWord word)
         {
             _context.UniqueWords.Add(word);

@@ -1,4 +1,4 @@
-﻿using BookApi.Models;
+﻿using WebApiBook.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApiBook.Data

@@ -1,4 +1,4 @@
-﻿using BookApi.Models;
+﻿using WebApiBook.Models;
 
 namespace WebApiBook.Repositories.Interfaces
 {

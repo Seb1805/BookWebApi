@@ -1,4 +1,4 @@
-﻿namespace BookApi.Models
+﻿namespace WebApiBook.Models
 {
     public class UniqueWord
     {
