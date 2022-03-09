@@ -17,5 +17,10 @@ namespace WebApiBook.Repositories
             _context.Add(word);
             _context.SaveChanges();
         }
+
+        public IEnumerable<WatchlistWord> GetWords()
+        {
+            return _context.WatchlistWords;
+        }
     }
 }

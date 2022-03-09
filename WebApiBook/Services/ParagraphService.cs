@@ -26,6 +26,11 @@ namespace WebApiBook.Services
                 _watchlistWord.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
             }
 
+            foreach(var word2 in _watchlistWord.GetWords())
+            {
+                Console.WriteLine(word2);
+            }
+
             return count;
         }
 
