@@ -14,7 +14,8 @@ namespace WebApiBook.Repositories
         }
         public void AddWatchlistWord(WatchlistWord word)
         {
-            throw new NotImplementedException();
+            _context.Add(word);
+            _context.SaveChanges();
         }
     }
 }

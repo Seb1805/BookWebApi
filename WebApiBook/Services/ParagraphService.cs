@@ -18,7 +18,17 @@ namespace WebApiBook.Services
         {
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
             IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
-            return uniqueWords.Count();
+            var count = uniqueWords.Count();
+            int uniqueWordId = _uniqueWordRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWords = count });
+            
+            foreach(var word in uniqueWords)
+            {
+                _watchlistWord.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
+            }
+
+            return count;
         }
+
+
     }
 }
