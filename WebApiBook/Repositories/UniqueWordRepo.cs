@@ -1,8 +1,8 @@
 ﻿using BookApi.Models;
-using System.Data.SqlClient;
+using BookApi.Repositories.Interfaces;
 using WebApiBook.Data;
 
-namespace BookApi.Repositories
+namespace WebApiBook.Repositories
 {
     public class UniqueWordRepo : IUniqueWord
     {

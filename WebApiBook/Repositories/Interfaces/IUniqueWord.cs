@@ -1,6 +1,6 @@
 ﻿using BookApi.Models;
 
-namespace BookApi.Repositories
+namespace WebApiBook.Repositories.Interfaces
 {
     public interface IUniqueWord
     {
