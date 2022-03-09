@@ -16,14 +16,11 @@ namespace WebApiBook.Controllers
     [ApiController]
     public class ParagraphController : ControllerBase
     {
-        private readonly IUniqueWord _uniqueWordRepo;
-        private readonly IWatchlistWord _watchlistWord;
+
         private readonly IParagraphService _paragraphService;
 
-        public ParagraphController(IUniqueWord uniqueWordRepo, IWatchlistWord watchlistWordRepo, IParagraphService paragraphService)
+        public ParagraphController(IParagraphService paragraphService)
         {
-            _uniqueWordRepo = uniqueWordRepo;
-            _watchlistWord = watchlistWordRepo;
             _paragraphService = paragraphService;
         }
 

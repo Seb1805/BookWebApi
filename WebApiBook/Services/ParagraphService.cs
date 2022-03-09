@@ -5,6 +5,15 @@ namespace WebApiBook.Services
 {
     public class ParagraphService : IParagraphService
     {
+        private readonly IUniqueWord _uniqueWordRepo;
+        private readonly IWatchlistWord _watchlistWord;
+
+        public ParagraphService(IUniqueWord uniqueWord,IWatchlistWord watchlistWord)
+        {
+            _uniqueWordRepo = uniqueWord;
+            _watchlistWord = watchlistWord;
+        }
+
         public int GetNumberOfUniqueWords(ParagraphRequest paragraph)
         {
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
