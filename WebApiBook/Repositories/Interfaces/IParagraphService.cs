@@ -4,6 +4,6 @@ namespace WebApiBook.Repositories.Interfaces
 {
     public interface IParagraphService
     {
-        public int GetNumberOfUniqueWords(ParagraphRequest paragraph);
+        public ParagraphResponse GetNumberOfUniqueWords(ParagraphRequest paragraph);
     }
 }

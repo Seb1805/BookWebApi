@@ -16,7 +16,7 @@ namespace WebApiBook.Services
             _TestWordRepo = TestWord;
         }
 
-        public int GetNumberOfUniqueWords(ParagraphRequest paragraph)
+        public ParagraphResponse GetNumberOfUniqueWords(ParagraphRequest paragraph)
         {
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
             IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
@@ -40,8 +40,9 @@ namespace WebApiBook.Services
                 _watchlistWordRepo.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
             }
 
+            List<string> words = uniqueWords.Intersect(_TestWordRepo.GetAllTestWords().Select(e => e.Word)).ToList();
 
-            return count;
+            return new ParagraphResponse { Count = count, UniqueWords = words };
         }
 
 

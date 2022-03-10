@@ -28,9 +28,10 @@ namespace WebApiBook.Controllers
         [HttpPost]
         public IActionResult PostParagraph([FromBody] ParagraphRequest paragraph)
         {
-            int uniqueWords = _paragraphService.GetNumberOfUniqueWords(paragraph);
+            ParagraphResponse response = _paragraphService.GetNumberOfUniqueWords(paragraph);
+            //int uniqueWords = _paragraphService.GetNumberOfUniqueWords(paragraph).Count;
             
-            return Ok(new { uniqueWords = uniqueWords });
+            return Ok(new { uniqueWords = response.Count , watchlistWords = response.UniqueWords});
         }
     }
 }
