@@ -5,18 +5,18 @@ using WebApiBook.Models;
 
 namespace WebApiBook.Repositories
 {
-    public class UniqueWordRepo : IUniqueWord
+    public class NumberOfUniqueWordRepo : INumberOfUniqueWords
     {
         private readonly BookContext _context;
 
-        public UniqueWordRepo(BookContext context)
+        public NumberOfUniqueWordRepo(BookContext context)
         {
             _context = context;
         }
 
-        public int AddUniqueWord(UniqueWord word)
+        public int AddNumberOfUniqueWords(NumberOfUniqueWord word)
         {
-            _context.UniqueWords.Add(word);
+            _context.NumberOfUniqueWords.Add(word);
             _context.SaveChanges();
             return word.Id;
         }

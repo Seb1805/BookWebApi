@@ -4,23 +4,23 @@ using WebApiBook.Repositories.Interfaces;
 
 namespace WebApiBook.Repositories
 {
-    public class WatchlistWordRepo : IWatchlistWord
+    public class UniqueWordsRepo : IUniqueWord
     {
         private readonly BookContext _context;
 
-        public WatchlistWordRepo(BookContext context)
+        public UniqueWordsRepo(BookContext context)
         {
             _context = context;
         }
-        public void AddWatchlistWord(WatchlistWord word)
+        public void AddUniqueWord(UniqueWord word)
         {
             _context.Add(word);
             _context.SaveChanges();
         }
 
-        public IEnumerable<WatchlistWord> GetWords()
+        public IEnumerable<UniqueWord> GetWords()
         {
-            return _context.WatchlistWords;
+            return _context.UniqueWords;
         }
     }
 }

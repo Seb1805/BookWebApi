@@ -10,8 +10,8 @@ namespace WebApiBook.Data
 
         }
 
+        public DbSet<NumberOfUniqueWord> NumberOfUniqueWords { get; set; }
         public DbSet<UniqueWord> UniqueWords { get; set; }
-        public DbSet<WatchlistWord> WatchlistWords { get; set; }
-        public DbSet<TestWord> TestWordList { get; set; }
+        public DbSet<Watchlist> Watchlist { get; set; }
     }
 }

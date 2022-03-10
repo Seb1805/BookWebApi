@@ -2,8 +2,8 @@
 
 namespace WebApiBook.Repositories.Interfaces
 {
-    public interface ITestWord
+    public interface IWatchlist
     {
-        public IEnumerable<TestWord> GetAllTestWords();
+        public IEnumerable<Watchlist> GetWatchlist();
     }
 }

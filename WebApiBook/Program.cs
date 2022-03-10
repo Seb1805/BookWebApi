@@ -20,9 +20,9 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("BookDb")));
 
 //Register service(s) and repos
 builder.Services.AddScoped<IParagraphService, ParagraphService>();
-builder.Services.AddScoped<IUniqueWord, UniqueWordRepo>();
-builder.Services.AddScoped<IWatchlistWord, WatchlistWordRepo>();
-builder.Services.AddScoped<ITestWord, TestWordRepo>();
+builder.Services.AddScoped<INumberOfUniqueWords,NumberOfUniqueWordRepo>();
+builder.Services.AddScoped<IUniqueWord,UniqueWordsRepo>();
+builder.Services.AddScoped<IWatchlist, WatchlistRepo>();
 
 
 var app = builder.Build();

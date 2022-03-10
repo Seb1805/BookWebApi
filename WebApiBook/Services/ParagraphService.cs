@@ -5,31 +5,36 @@ namespace WebApiBook.Services
 {
     public class ParagraphService : IParagraphService
     {
-        private readonly IUniqueWord _uniqueWordRepo;
-        private readonly IWatchlistWord _watchlistWordRepo;
-        private readonly ITestWord _TestWordRepo;
+        private readonly INumberOfUniqueWords _numberOfUniqueWordsRepo;
+        private readonly IUniqueWord _uniqueWordsRepo;
+        private readonly IWatchlist _watchlistRepo;
 
-        public ParagraphService(IUniqueWord uniqueWord,IWatchlistWord watchlistWord, ITestWord TestWord)
+        public ParagraphService(INumberOfUniqueWords numberOfUniqueWords,IUniqueWord uniqueWord, IWatchlist watchlist)
         {
-            _uniqueWordRepo = uniqueWord;
-            _watchlistWordRepo = watchlistWord;
-            _TestWordRepo = TestWord;
+            _numberOfUniqueWordsRepo = numberOfUniqueWords;
+            _uniqueWordsRepo = uniqueWord;
+            _watchlistRepo = watchlist;
         }
 
         public ParagraphResponse GetNumberOfUniqueWords(ParagraphRequest paragraph)
         {
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
-            IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
+            
+            //True unique words
+            //IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
+            
+            //Remove duplicates "fake unique"
+            IEnumerable<string> uniqueWords = allWords.Distinct().ToList();
             var count = uniqueWords.Count();
-            int uniqueWordId = _uniqueWordRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWords = count });
+            int uniqueWordId = _numberOfUniqueWordsRepo.AddNumberOfUniqueWords(new NumberOfUniqueWord { NumOfUniqueWords = count });
 
 
             foreach(var word in uniqueWords)
             {
-                _watchlistWordRepo.AddWatchlistWord(new WatchlistWord { UniqueWordId = uniqueWordId, Word = word });
+                _uniqueWordsRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWordsId = uniqueWordId, Word = word });
             }
 
-            List<string> words = uniqueWords.Intersect(_TestWordRepo.GetAllTestWords().Select(e => e.Word)).ToList();
+            List<string> words = uniqueWords.Intersect(_watchlistRepo.GetWatchlist().Select(e => e.Word)).ToList();
 
             return new ParagraphResponse { Count = count, UniqueWords = words };
         }

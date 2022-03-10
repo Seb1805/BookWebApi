@@ -4,18 +4,18 @@ using WebApiBook.Repositories.Interfaces;
 
 namespace WebApiBook.Repositories
 {
-    public class TestWordRepo : ITestWord
+    public class WatchlistRepo : IWatchlist
     {
         private readonly BookContext _context;
 
-        public TestWordRepo(BookContext context)
+        public WatchlistRepo(BookContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<TestWord> GetAllTestWords()
+        public IEnumerable<Watchlist> GetWatchlist()
         {
-            var list = _context.TestWordList.ToList();
+            var list = _context.Watchlist.ToList();
             return list;
         }
     }

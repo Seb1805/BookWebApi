@@ -3,7 +3,8 @@
     public class UniqueWord
     {
         public int Id { get; set; }
-        public int NumberOfUniqueWords { get; set; }
-        public IEnumerable<WatchlistWord> WatchlistWords { get; set; }
+        public int NumberOfUniqueWordsId { get; set; }
+        public string Word { get; set; }
+        //public UniqueWord UniqueWord {get;set;}
     }
 }
