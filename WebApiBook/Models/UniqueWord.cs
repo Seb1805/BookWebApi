@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public int NumberOfUniqueWordsId { get; set; }
         public string Word { get; set; }
-        //public UniqueWord UniqueWord {get;set;}
+
     }
 }
