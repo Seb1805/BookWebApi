@@ -22,18 +22,7 @@ namespace WebApiBook.Services
             IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
             var count = uniqueWords.Count();
             int uniqueWordId = _uniqueWordRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWords = count });
-            
-            List<string> matchingWords = new List<string>();
 
-            foreach(var word in _TestWordRepo.GetAllTestWords())
-            {
-                foreach(var word2 in uniqueWords)
-                {
-
-                }
-            }
-
-            System.Diagnostics.Trace.WriteLine("THIS" + uniqueWords.Intersect(_TestWordRepo.GetAllTestWords().Select(e => e.Word)));
 
             foreach(var word in uniqueWords)
             {
