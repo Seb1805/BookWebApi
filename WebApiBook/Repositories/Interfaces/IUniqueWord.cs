@@ -7,5 +7,7 @@ namespace WebApiBook.Repositories.Interfaces
         public void AddUniqueWord(UniqueWord word);
 
         public IEnumerable<UniqueWord> GetWords();
+
+        public void SaveChanges();
     }
 }

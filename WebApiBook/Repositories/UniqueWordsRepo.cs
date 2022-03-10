@@ -15,12 +15,17 @@ namespace WebApiBook.Repositories
         public void AddUniqueWord(UniqueWord word)
         {
             _context.Add(word);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public IEnumerable<UniqueWord> GetWords()
         {
             return _context.UniqueWords;
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }
