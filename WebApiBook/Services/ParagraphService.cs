@@ -19,7 +19,7 @@ namespace WebApiBook.Services
         public ParagraphResponse GetNumberOfUniqueWords(ParagraphRequest paragraph)
         {
             System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
-
+            watch.Start();
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
 
             //True unique words
@@ -31,7 +31,8 @@ namespace WebApiBook.Services
             var count = uniqueWords.Count();
             int uniqueWordId = _numberOfUniqueWordsRepo.AddNumberOfUniqueWords(new NumberOfUniqueWord { NumOfUniqueWords = count });
 
-            watch.Start();
+
+
 
             foreach (var word in uniqueWords)
             {
@@ -43,16 +44,15 @@ namespace WebApiBook.Services
             }
             //Move savechanges outside the loop for increased perfomence
             _uniqueWordsRepo.SaveChanges();
-            watch.Stop();
-            List<string> words = uniqueWords.Intersect(_watchlistRepo.GetWatchlist().Select(e => e.Word)).ToList();
 
+            List<string> words = uniqueWords.Intersect(_watchlistRepo.GetWatchlist().Select(e => e.Word)).ToList();
             TimeSpan ts = watch.Elapsed;
 
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-
+            watch.Stop();
             System.Diagnostics.Trace.WriteLine("RunTime " + elapsedTime);
             return new ParagraphResponse { Count = count, UniqueWords = words };
         }
