@@ -15,8 +15,7 @@ namespace WebApiBook.Repositories
 
         public IEnumerable<Watchlist> GetWatchlist()
         {
-            var list = _context.Watchlist.ToList();
-            return list;
+            return _context.Watchlist;
         }
     }
 }
