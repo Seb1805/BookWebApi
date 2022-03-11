@@ -15,6 +15,7 @@ namespace WebApiBook.Repositories
         public void AddUniqueWord(UniqueWord word)
         {
             _context.Add(word);
+            //Movied to seperate function to increase performence
             //_context.SaveChanges();
         }
 

@@ -28,10 +28,18 @@ namespace WebApiBook.Controllers
         [HttpPost]
         public IActionResult PostParagraph([FromBody] ParagraphRequest paragraph)
         {
-            ParagraphResponse response = _paragraphService.GetNumberOfUniqueWords(paragraph);
-            //int uniqueWords = _paragraphService.GetNumberOfUniqueWords(paragraph).Count;
-            
-            return Ok(new { uniqueWords = response.Count , watchlistWords = response.UniqueWords});
+            try
+            {
+                ParagraphResponse response = _paragraphService.GetNumberOfUniqueWords(paragraph);
+                //int uniqueWords = _paragraphService.GetNumberOfUniqueWords(paragraph).Count;
+
+                return Ok(new { uniqueWords = response.Count, watchlistWords = response.UniqueWords });
+            }
+            catch (Exception ex)
+            {
+                //Could use logger to log to file, database, event viewer or console.
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

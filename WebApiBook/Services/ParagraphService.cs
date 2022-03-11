@@ -42,17 +42,20 @@ namespace WebApiBook.Services
                 _uniqueWordsRepo.AddUniqueWord(uniqueWord);
                 //_uniqueWordsRepo.AddUniqueWord(new UniqueWord { NumberOfUniqueWordsId = uniqueWordId, Word = word });
             }
+
             //Move savechanges outside the loop for increased perfomence
             _uniqueWordsRepo.SaveChanges();
 
             List<string> words = uniqueWords.Intersect(_watchlistRepo.GetWatchlist().Select(e => e.Word)).ToList();
+            //List<string> words = _watchlistRepo.GetWatchlist().Select(e => e.Word).Intersect(uniqueWords).ToList();
+            watch.Stop();
             TimeSpan ts = watch.Elapsed;
 
             // Format and display the TimeSpan value.
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-            watch.Stop();
+
             System.Diagnostics.Trace.WriteLine("RunTime " + elapsedTime);
             return new ParagraphResponse { Count = count, UniqueWords = words };
         }
