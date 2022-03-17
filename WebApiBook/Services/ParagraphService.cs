@@ -15,19 +15,33 @@ namespace WebApiBook.Services
             _uniqueWordsRepo = uniqueWord;
             _watchlistRepo = watchlist;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="paragraph"></param>
+        /// <returns></returns>
         public ParagraphResponse GetNumberOfUniqueWords(ParagraphRequest paragraph)
         {
             //Assume text has replaced quotes ""
+            //TODO: RegExp
             IEnumerable<string> allWords = paragraph.Paragraph.Split(' ');
 
             //True unique words
             //IEnumerable<string> uniqueWords = allWords.GroupBy(w => w).Where(g => g.Count() == 1).Select(g => g.Key);
 
-            //Remove duplicates "fake unique"
+            //Remove duplicates "fake unique
             IEnumerable<string> uniqueWords = allWords.Distinct();
             var count = uniqueWords.Count();
-            
+            //try
+            //{
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception("Test",ex);
+            //}
+
+
             NumberOfUniqueWord numOfWords = new NumberOfUniqueWord();
             numOfWords.NumOfUniqueWords = count;
             int uniqueWordId = _numberOfUniqueWordsRepo.AddNumberOfUniqueWords(numOfWords);

@@ -23,6 +23,7 @@ builder.Services.AddScoped<IParagraphService, ParagraphService>();
 builder.Services.AddScoped<INumberOfUniqueWords,NumberOfUniqueWordRepo>();
 builder.Services.AddScoped<IUniqueWord,UniqueWordsRepo>();
 builder.Services.AddScoped<IWatchlist, WatchlistRepo>();
+//AddTransient may be better than AddScoped
 
 
 var app = builder.Build();

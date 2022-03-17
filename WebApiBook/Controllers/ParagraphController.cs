@@ -24,7 +24,7 @@ namespace WebApiBook.Controllers
             _paragraphService = paragraphService;
         }
 
-
+        //Consider changing return type to get documentation in swagger
         [HttpPost]
         public IActionResult PostParagraph([FromBody] ParagraphRequest paragraph)
         {
